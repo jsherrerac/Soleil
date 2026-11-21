@@ -1,0 +1,10 @@
+:root {
+  /* Paleta del manual de marca */
+  --marfil: #F4EADC;
+  --espresso: #3A2315;
+  --terracota: #C86E4A;
+
+  /* Tipografías */
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Montserrat', sans-serif;
+}
