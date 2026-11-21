@@ -1,5 +1,6 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { initLinterna } from './linterna.js'
 
 // El espacio: mientras bajas, la sección se queda quieta (pin)
 // y la pista de fotos se corre hacia la izquierda.
@@ -29,39 +30,17 @@ export function initEspacio() {
       start: 'top top',
       end: function () { return '+=' + distancia() },   // el pin dura lo que dura el viaje
       pin: true,
-      scrub: 1,
+      // scrub: true (sin retraso): las fotos miden su avance contra esta animación,
+      // así que tiene que ir exactamente con el scroll. Lenis ya pone la suavidad.
+      scrub: true,
       invalidateOnRefresh: true,         // si cambia el tamaño de la ventana, recalcula la distancia
       refreshPriority: 1,                // se mide primero: el pin alarga la página y los demás deben saberlo
       onRefresh: function () { recorrido = distancia() }
     }
   })
 
-  // --- La linterna: el mouse ilumina los dibujos del patrón (solo en computador) ---
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const luz = { x: 0, y: 0, radio: 0 }
-    function pintarLuz() {
-      fijo.style.setProperty('--luz-x', luz.x + 'px')
-      fijo.style.setProperty('--luz-y', luz.y + 'px')
-      fijo.style.setProperty('--luz-radio', luz.radio + 'px')
-    }
-    // La luz sigue al mouse con un poquito de retraso, como si pesara
-    const irAX = gsap.quickTo(luz, 'x', { duration: 0.6, ease: 'power3.out', onUpdate: pintarLuz })
-    const irAY = gsap.quickTo(luz, 'y', { duration: 0.6, ease: 'power3.out', onUpdate: pintarLuz })
-
-    seccion.addEventListener('pointerenter', function (e) {
-      const caja = fijo.getBoundingClientRect()
-      gsap.set(luz, { x: e.clientX - caja.left, y: e.clientY - caja.top })
-      gsap.to(luz, { radio: 230, duration: 0.7, ease: 'power2.out', overwrite: 'auto', onUpdate: pintarLuz })   // se prende
-    })
-    seccion.addEventListener('pointermove', function (e) {
-      const caja = fijo.getBoundingClientRect()
-      irAX(e.clientX - caja.left)
-      irAY(e.clientY - caja.top)
-    })
-    seccion.addEventListener('pointerleave', function () {
-      gsap.to(luz, { radio: 0, duration: 0.7, ease: 'power2.out', overwrite: 'auto', onUpdate: pintarLuz })    // se apaga
-    })
-  }
+  // El mouse ilumina los dibujos del patrón (ver linterna.js)
+  initLinterna(fijo)
 
   fotos.forEach(function (foto, i) {
     const marco = foto.querySelector('.espacio__marco')

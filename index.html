@@ -50,6 +50,9 @@
       <p class="preloader__texto preloader__texto--contador"><span class="preloader__numero">000</span></p>
     </div>
 
+    <!-- Cortina del cambio de hora: cuando cambia la sección, el color nuevo sale en círculo desde el sol -->
+    <div class="cortina" aria-hidden="true"></div>
+
     <!-- Capa fija detrás de todo: el sol cruza el cielo con el scroll -->
     <div class="cielo" aria-hidden="true">
       <!-- Sol de Deiby, centrado en (0,0): así gira sobre su propio centro -->
@@ -68,8 +71,30 @@
       </svg>
     </div>
 
+    <!-- Barra fija: la marca a la izquierda y el reloj (que también abre el menú) a la derecha -->
+    <header class="barra">
+      <a class="barra__marca" href="#hero">Soleil</a>
+      <button class="barra__reloj" type="button" aria-expanded="false" aria-controls="menu-horas">
+        <span class="barra__hora">07:00</span>
+        <span class="barra__texto">Menú</span>
+      </button>
+    </header>
+
+    <!-- Menú: se navega por las horas del día -->
+    <nav class="menu-horas con-linterna" id="menu-horas" aria-label="Secciones" hidden>
+      <ol class="menu-horas__lista">
+        <li><a href="#hero"><span>07:00</span> Amanece</a></li>
+        <li><a href="#manifiesto"><span>08:00</span> Lo que creemos</a></li>
+        <li><a href="#dia"><span>09:00</span> Lo que servimos</a></li>
+        <li><a href="#espacio"><span>17:00</span> El espacio</a></li>
+        <li><a href="#reserva"><span>18:00</span> Reserva tu mesa</a></li>
+        <li><a href="#noche"><span>19:30</span> Buenas noches</a></li>
+      </ol>
+    </nav>
+
     <main>
-      <section class="section hero" id="hero">
+      <!-- Cada sección trae su tema de color (data-tema) y las horas del reloj vienen de data-hora (ver horas.js) -->
+      <section class="section hero" id="hero" data-tema="marfil" data-hora="07:00">
         <p class="hero__hora">07:00 — Amanece en Soleil</p>
         <h1 class="hero__marca">
           <span class="solo-lectores">Soleil Brunch</span>
@@ -158,15 +183,70 @@
           <span class="hero__o" aria-hidden="true"><span class="hero__agarre"></span></span>
         </h1>
         <p class="hero__lema">Good food. <span>Bright days.</span></p>
+        <p class="hero__desliza etiqueta" aria-hidden="true">Desliza</p>
       </section>
-      <section class="section" id="manifiesto">Manifiesto</section>
-      <section class="section" id="dia">El día en Soleil</section>
-      <section class="section" id="cafe">El café</section>
-      <section class="section" id="panaderia">La panadería</section>
-      <section class="section" id="menu">Menú</section>
-      <section class="espacio" id="espacio">
+      <section class="manifiesto" id="manifiesto" data-tema="marfil" data-hora="08:00">
+        <p class="etiqueta">Lo que creemos</p>
+        <!-- BORRADOR: texto para que Deiby (o tú) lo ajusten -->
+        <p class="manifiesto__texto">Un buen día empieza despacio: pan que sale caliente del horno, café de origen colombiano y una mesa con tiempo para quedarse. En Soleil cocinamos para las mañanas que nadie quiere apurar.</p>
+        <span class="manifiesto__dibujo manifiesto__dibujo--a dibujo" style="--dibujo: url(/ilustraciones/croissant.svg); --proporcion: 1.49" aria-hidden="true"></span>
+        <span class="manifiesto__dibujo manifiesto__dibujo--b dibujo" style="--dibujo: url(/ilustraciones/taza.svg); --proporcion: 1.29" aria-hidden="true"></span>
+        <span class="manifiesto__dibujo manifiesto__dibujo--c dibujo" style="--dibujo: url(/ilustraciones/granos-cafe.svg); --proporcion: 1.28" aria-hidden="true"></span>
+      </section>
+
+      <section class="dia" id="dia" data-tema="durazno">
+        <div class="dia__cabeza">
+          <p class="etiqueta">Lo que servimos</p>
+          <h2 class="dia__titulo">Cada hora tiene<br>su sabor</h2>
+        </div>
+        <!-- BORRADOR: la carta real la manda Deiby. Cada momento marca su hora en el reloj de la barra -->
+        <ol class="dia__lista">
+          <li class="momento" data-hora="09:00">
+            <span class="momento__hora">09:00</span>
+            <div class="momento__texto">
+              <h3 class="momento__nombre">Café de origen</h3>
+              <p class="momento__detalle">Espresso, latte y filtrados con café de fincas colombianas, tostado cada semana.</p>
+            </div>
+            <span class="momento__dibujo dibujo" style="--dibujo: url(/ilustraciones/taza-latte.svg); --proporcion: 1.41"></span>
+          </li>
+          <li class="momento" data-hora="10:00">
+            <span class="momento__hora">10:00</span>
+            <div class="momento__texto">
+              <h3 class="momento__nombre">Recién horneado</h3>
+              <p class="momento__detalle">Croissants de mantequilla, pan de masa madre y rollos de canela que salen del horno toda la mañana.</p>
+            </div>
+            <span class="momento__dibujo dibujo" style="--dibujo: url(/ilustraciones/croissant.svg); --proporcion: 1.49"></span>
+          </li>
+          <li class="momento" data-hora="11:30">
+            <span class="momento__hora">11:30</span>
+            <div class="momento__texto">
+              <h3 class="momento__nombre">Brunch</h3>
+              <p class="momento__detalle">Pancakes con frutos rojos, huevos a tu manera y jugos recién exprimidos.</p>
+            </div>
+            <span class="momento__dibujo dibujo" style="--dibujo: url(/ilustraciones/pancakes.svg); --proporcion: 1.17"></span>
+          </li>
+          <li class="momento" data-hora="13:00">
+            <span class="momento__hora">13:00</span>
+            <div class="momento__texto">
+              <h3 class="momento__nombre">Salado</h3>
+              <p class="momento__detalle">Tostadas de aguacate, sándwiches en pan de la casa y ensaladas de temporada.</p>
+            </div>
+            <span class="momento__dibujo dibujo" style="--dibujo: url(/ilustraciones/tostada-aguacate.svg); --proporcion: 1.66"></span>
+          </li>
+          <li class="momento" data-hora="16:00">
+            <span class="momento__hora">16:00</span>
+            <div class="momento__texto">
+              <h3 class="momento__nombre">La tarde dulce</h3>
+              <p class="momento__detalle">Un café más y algo dulce para cerrar el día sin afán.</p>
+            </div>
+            <span class="momento__dibujo dibujo" style="--dibujo: url(/ilustraciones/rollo-canela.svg); --proporcion: 1.24"></span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="espacio" id="espacio" data-tema="espresso" data-hora="17:00">
         <!-- Esta caja se queda quieta (pin) mientras la pista de fotos se corre hacia la izquierda -->
-        <div class="espacio__fijo">
+        <div class="espacio__fijo con-linterna">
           <p class="espacio__etiqueta">El espacio</p>
           <p class="espacio__contador"><span class="espacio__actual">01</span> / 04</p>
           <div class="espacio__pista">
@@ -198,9 +278,36 @@
           </div>
         </div>
       </section>
-      <section class="section" id="instagram">Instagram</section>
-      <section class="section" id="reserva">Reserva</section>
-      <footer class="section" id="noche">Noche</footer>
+      <!-- Reserva: sección alta con una caja "sticky" adentro; la foto se abre mientras bajas -->
+      <section class="reserva" id="reserva" data-tema="terracota" data-hora="18:00">
+        <div class="reserva__fijo">
+          <div class="reserva__foto">
+            <img src="/img/amigos-terraza-1344.webp" srcset="/img/amigos-terraza-800.webp 800w, /img/amigos-terraza-1344.webp 1344w" sizes="100vw" width="1344" height="752" alt="Un grupo de amigos desayunando y brindando en la terraza de Soleil Brunch" loading="lazy" decoding="async">
+          </div>
+          <div class="reserva__contenido">
+            <p class="etiqueta">18:00 · La mejor mesa es la de afuera</p>
+            <h2 class="reserva__titulo">Reserva<br>tu mesa</h2>
+            <!-- La página /reservas (con su backend) es el siguiente paso -->
+            <a class="boton boton--claro" href="/reservas">Reservar <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Noche: la linterna y el horno (cada clic suelta un dibujo que cae con física) -->
+      <footer class="noche con-linterna" id="noche" data-tema="noche" data-hora="19:30">
+        <div class="noche__contenido">
+          <p class="etiqueta">19:30 · Cerramos la cocina</p>
+          <h2 class="noche__titulo">Buenas<br>noches</h2>
+          <p class="noche__pista">Haz clic donde quieras: el horno sigue prendido.</p>
+          <div class="noche__datos">
+            <p><span class="etiqueta">Horario</span>Todos los días<br>07:00 — 19:30</p>
+            <p><span class="etiqueta">Dónde</span>Bogotá, Colombia</p>
+            <p><span class="etiqueta">Proyecto</span>Marca ficticia, creada para practicar diseño y desarrollo web</p>
+          </div>
+        </div>
+        <div class="noche__horno" aria-hidden="true"></div>
+        <p class="noche__creditos">Diseño de marca: Deiby · Desarrollo: Sebastián Herrera · 2026</p>
+      </footer>
     </main>
     <!-- Cursor propio: un punto con el color del sol -->
     <div class="cursor" aria-hidden="true"><div class="cursor__punto"></div></div>

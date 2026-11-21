@@ -18,7 +18,7 @@ function calcularDestino() {
 
 // Preloader: la noche antes de abrir Soleil.
 // La espiral se dibuja al ritmo de la carga, salen los rayos y amanece.
-export function initPreloader(lenis, entradaHero, sol) {
+export function initPreloader(lenis, entradaHero, sol, horas) {
   const pre = document.querySelector('.preloader')
   const numero = pre.querySelector('.preloader__numero')
   const hora = pre.querySelector('.preloader__texto--hora')
@@ -94,6 +94,8 @@ export function initPreloader(lenis, entradaHero, sol) {
       const persecucion = st.getTween()
       if (persecucion) persecucion.progress(1)
     })
+    // El color de esa hora del día se pone de una vez (sin la cortina: nadie la vería)
+    horas.sincronizar()
     // El amanecer se pinta del color que tiene la página en ese punto del día
     amanecer.style.background = getComputedStyle(document.body).backgroundColor
   }

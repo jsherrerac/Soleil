@@ -1,0 +1,61 @@
+.dia {
+  position: relative;
+  padding: 22vh 8vw 25vh;
+}
+
+.dia__cabeza { margin-bottom: 8vh; }
+
+.dia__titulo {
+  margin-top: 1rem;
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 1;
+}
+
+.dia__lista { list-style: none; }
+
+/* Cada momento del día: hora grande, texto y dibujo. Apagado hasta que pasa por el centro */
+.momento {
+  display: grid;
+  grid-template-columns: minmax(8rem, 1fr) 2fr minmax(8rem, 1fr);
+  align-items: center;
+  gap: 4vw;
+  padding: 6vh 0;
+  border-top: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+.momento.activo { opacity: 1; }
+
+.momento__hora {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 6.5rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.momento__nombre {
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+}
+
+.momento__detalle {
+  max-width: 38ch;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.momento__dibujo {
+  justify-self: end;
+  width: 100%;
+  max-width: 220px;
+  color: var(--terracota);
+  transform: scale(0.8) rotate(-8deg);
+  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);   /* se pasa un poquito y vuelve: rebote */
+}
+.momento.activo .momento__dibujo { transform: scale(1) rotate(0deg); }
+.momento.activo:hover .momento__dibujo { transform: scale(1.08) rotate(5deg); }
+
+@media (max-width: 700px) {
+  .momento { grid-template-columns: 1fr; gap: 1rem; }
+  .momento__dibujo { justify-self: start; max-width: 140px; }
+}

@@ -1,0 +1,45 @@
+/* Patrón de Deiby + linterna. Sirve para cualquier elemento con la clase .con-linterna:
+   - ::before → el patrón apenas visible en todo el elemento
+   - ::after  → el patrón iluminado alrededor del mouse (linterna.js mueve la luz)
+   patron.webp es UNA baldosa de dibujos negros sobre transparente usada como MÁSCARA:
+   el color lo pone background-color, así la misma imagen sirve para cualquier color. */
+.con-linterna {
+  position: relative;
+}
+
+.con-linterna::before,
+.con-linterna::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--color-patron, var(--terracota));
+  -webkit-mask-image: url('/patron.webp');
+  mask-image: url('/patron.webp');
+  -webkit-mask-size: 640px auto;
+  mask-size: 640px auto;
+  -webkit-mask-position: var(--patron-x, 0px) 0;
+  mask-position: var(--patron-x, 0px) 0;
+}
+
+/* Capa 1: el patrón apenas se insinúa */
+.con-linterna::before {
+  opacity: 0.07;
+}
+
+/* Capa 2: la linterna. Son DOS máscaras a la vez: el patrón y un círculo que sigue al mouse.
+   Con "intersect" solo se ve lo que está en las dos: los dibujos que caen dentro del círculo. */
+.con-linterna::after {
+  opacity: 0.6;
+  -webkit-mask-image: url('/patron.webp'), radial-gradient(circle var(--luz-radio, 0px) at var(--luz-x, 50%) var(--luz-y, 50%), #000 0%, transparent 100%);
+  mask-image: url('/patron.webp'), radial-gradient(circle var(--luz-radio, 0px) at var(--luz-x, 50%) var(--luz-y, 50%), #000 0%, transparent 100%);
+  -webkit-mask-size: 640px auto, 100% 100%;
+  mask-size: 640px auto, 100% 100%;
+  -webkit-mask-repeat: repeat, no-repeat;
+  mask-repeat: repeat, no-repeat;
+  -webkit-mask-position: var(--patron-x, 0px) 0, 0 0;
+  mask-position: var(--patron-x, 0px) 0, 0 0;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}

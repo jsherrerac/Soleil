@@ -3,6 +3,12 @@ import gsap from 'gsap'
 // Radio de la espiral dentro del SVG (el viewBox mide 100 de ancho; los rayos llegan al borde)
 const RADIO_ESPIRAL = 28
 
+// "#C86E4A" → "rgb(200, 110, 74)". Con dos colores en el mismo formato, GSAP los mezcla número por número
+export function aRGB(color) {
+  const c = gsap.utils.splitColor(color)
+  return 'rgb(' + c[0] + ', ' + c[1] + ', ' + c[2] + ')'
+}
+
 // Mide dónde está el sol en el logo (con la página arriba del todo) y qué tan grande se ve.
 // .hero__o es una caja invisible con el lugar y el tamaño exactos del sol en el archivo de Deiby.
 export function medirO() {
@@ -25,12 +31,22 @@ export function initSol() {
   // La espiral y los rayos giran alrededor del punto (0,0) del SVG, que es su centro
   gsap.set([espiral, rayos], { svgOrigin: '0 0' })
 
-  // Colores leídos del CSS: mezclarColor(0) = terracota, mezclarColor(1) = marfil
-  const css = getComputedStyle(document.documentElement)
-  const mezclarColor = gsap.utils.interpolate(
-    css.getPropertyValue('--terracota').trim(),
-    css.getPropertyValue('--marfil').trim()
-  )
+  // Color del sol: lo decide la hora del día (horas.js llama a cambiarColor)
+  const colorSol = { valor: aRGB(getComputedStyle(document.documentElement).getPropertyValue('--terracota').trim()) }
+
+  function pintarColor() {
+    sol.style.setProperty('--color-sol', colorSol.valor)
+  }
+
+  function cambiarColor(color, inmediato) {
+    if (inmediato) {
+      gsap.killTweensOf(colorSol)
+      colorSol.valor = aRGB(color)
+      pintarColor()
+      return
+    }
+    gsap.to(colorSol, { valor: aRGB(color), duration: 0.9, ease: 'power2.inOut', overwrite: 'auto', onUpdate: pintarColor })
+  }
 
   // p = avance del día (toda la página): 0 = amanecer, 1 = anochecer
   // h = avance del hero (la primera pantalla): 0 = sol en la O, 1 = sol ya en el cielo
@@ -40,9 +56,8 @@ export function initSol() {
   // x, y = cuánto lo has corrido de su puesto; escala = qué tanto lo "levantas"
   const desplazamiento = { x: 0, y: 0, escala: 1 }
 
-  // Dónde quedó dibujado el sol la última vez y de qué color (lo leen arrastre.js y cursor.js)
+  // Dónde quedó dibujado el sol la última vez (lo leen arrastre.js y horas.js)
   const actual = { x: 0, y: 0 }
-  let colorActual = ''
 
   // Curva para "soltar" el sol de la O: arranca suave, acelera y vuelve a frenar
   const suavizar = gsap.parseEase('power2.inOut')
@@ -98,11 +113,6 @@ export function initSol() {
     gsap.set(sol, { x: actual.x, y: actual.y, scale: escala })
     gsap.set(espiral, { rotation: p * 720 + rodar })   // dos vueltas en todo el día
     gsap.set(rayos, { rotation: -p * 180 + rodar })     // al revés y más lento
-
-    // 7. Color: terracota toda la mañana; en la tarde se aclara para resaltar sobre el cielo oscuro
-    const tarde = Math.max(0, (p - 0.5) * 2)    // 0 hasta el mediodía, luego sube hasta 1
-    colorActual = mezclarColor(tarde)
-    sol.style.setProperty('--color-sol', colorActual)
   }
 
   // El día: p va de 0 a 1 a lo largo de TODA la página
@@ -121,6 +131,7 @@ export function initSol() {
     scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 }
   })
 
+  pintarColor()
   medir()
   document.fonts.ready.then(medir)            // vuelve a medir cuando Cinzel ya cargó
   window.addEventListener('resize', medir)
@@ -131,7 +142,8 @@ export function initSol() {
     dibujar: dibujarSol,
     desplazamiento: desplazamiento,
     actual: actual,
-    color: function () { return colorActual },
+    color: function () { return colorSol.valor },
+    cambiarColor: cambiarColor,
     tamanoEnO: function () { return o.ancho },
     enElHero: function () { return estado.h < 0.02 }   // ¿está la página arriba del todo?
   }

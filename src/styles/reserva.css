@@ -1,0 +1,51 @@
+/* Sección alta (220vh) con una caja "sticky": la caja se queda quieta mientras pasan los 220vh.
+   Es la forma de CSS de fijar algo, sin JavaScript. GSAP solo anima lo de adentro. */
+.reserva {
+  position: relative;
+  height: 220vh;
+}
+
+.reserva__fijo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* La foto arranca como un marco pequeño redondeado (reserva.js la abre) */
+.reserva__foto {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(22% 30% round 28px);
+}
+.reserva__foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Sombra de abajo hacia arriba para que el texto se lea encima de la foto */
+.reserva__foto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(58 35 21 / 0.8), rgb(58 35 21 / 0.2));
+  opacity: var(--sombra, 0);
+}
+
+.reserva__contenido {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  color: var(--marfil);
+}
+
+.reserva__titulo {
+  font-size: clamp(3rem, 10vw, 9rem);
+  line-height: 0.95;
+}

@@ -59,3 +59,58 @@ body::after {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
 }
+
+/* Etiqueta chiquita en mayúsculas (la que va encima de los títulos) */
+.etiqueta {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* Dibujos de Deiby usados como MÁSCARA: el color lo pone background-color (currentColor).
+   Cada uno trae su archivo en --dibujo y su proporción (ancho / alto) en --proporcion */
+.dibujo {
+  display: block;
+  aspect-ratio: var(--proporcion, 1);
+  background-color: currentColor;
+  -webkit-mask: var(--dibujo) center / contain no-repeat;
+  mask: var(--dibujo) center / contain no-repeat;
+}
+
+/* Botón principal */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2rem;
+  border-radius: 999px;
+  background: var(--espresso);
+  color: var(--marfil);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+.boton:hover { transform: translateY(-3px); }
+.boton--claro { background: var(--marfil); color: var(--espresso); }
+
+/* Foco visible para quien navega con teclado */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--terracota);
+  outline-offset: 4px;
+}
+
+/* La cortina del cambio de hora (horas.js la abre en círculo desde el sol).
+   Está ANTES del cielo en el HTML: así queda encima del fondo, pero debajo del sol y del contenido */
+.cortina {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  clip-path: circle(0% at 50% 50%);
+}

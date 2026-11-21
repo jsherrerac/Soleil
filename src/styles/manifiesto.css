@@ -1,0 +1,32 @@
+.manifiesto {
+  position: relative;
+  min-height: 120vh;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 2.5rem;
+  padding: 20vh 8vw;
+  text-align: center;
+  overflow: hidden;            /* los dibujos pueden asomarse por los bordes */
+}
+
+.manifiesto__texto {
+  max-width: 26ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.2vw, 4.2rem);
+  line-height: 1.2;
+}
+
+/* Dibujos que flotan alrededor del texto */
+.manifiesto__dibujo {
+  position: absolute;
+  width: clamp(110px, 15vw, 230px);
+  color: var(--terracota);
+}
+.manifiesto__dibujo--a { left: 5vw; top: 14%; }
+.manifiesto__dibujo--b { right: 6vw; top: 58%; }
+.manifiesto__dibujo--c { left: 14vw; bottom: 8%; width: clamp(70px, 8vw, 120px); }
+
+@media (max-width: 700px) {
+  .manifiesto__dibujo { opacity: 0.35; }
+}

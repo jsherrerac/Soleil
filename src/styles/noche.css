@@ -1,0 +1,66 @@
+.noche {
+  position: relative;
+  min-height: 100vh;
+  padding: 18vh 8vw 6rem;
+  overflow: hidden;
+  color: var(--marfil);
+  --color-patron: var(--marfil);      /* de noche los dibujos se iluminan en marfil */
+}
+
+.noche__contenido {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1.5rem;
+  max-width: 60rem;
+}
+
+.noche__titulo {
+  font-size: clamp(3.5rem, 12vw, 11rem);
+  line-height: 0.9;
+}
+
+.noche__pista {
+  font-family: var(--font-body);
+  opacity: 0.7;
+}
+
+.noche__datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+.noche__datos .etiqueta {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--terracota);
+}
+
+/* El horno: aquí caen las piezas. Encima del patrón, debajo del texto, sin tapar clics */
+.noche__horno {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pieza {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.noche__creditos {
+  position: relative;          /* debajo de los datos, por encima de las piezas que se amontonan */
+  z-index: 2;
+  margin-top: 3rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+

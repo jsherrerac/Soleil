@@ -8,6 +8,7 @@ export function initHero() {
   const ventana = document.querySelector('.hero__letras')    // el grupo que tiene la "ventana" (clip-path)
   const hora = document.querySelector('.hero__hora')
   const lema = document.querySelector('.hero__lema')
+  const desliza = document.querySelector('.hero__desliza')
 
   const tl = gsap.timeline({
     paused: true,
@@ -38,7 +39,7 @@ export function initHero() {
       duration: 1.4,
       ease: 'expo.out'
     }, 0.3)
-    .from([hora, lema], { autoAlpha: 0, y: 12, duration: 0.9, stagger: 0.1, ease: 'power2.out' }, 0.5)
+    .from([hora, lema, desliza], { autoAlpha: 0, y: 12, duration: 0.9, stagger: 0.1, ease: 'power2.out' }, 0.5)
 
   return { entrada: tl, letras: letras }
 }

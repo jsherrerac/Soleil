@@ -13,50 +13,11 @@
   overflow: hidden;
 }
 
-/* El patrón de Deiby detrás de las fotos.
-   patron.webp es UNA baldosa de dibujos negros sobre transparente y se usa como MÁSCARA:
-   el color lo pone background-color, así la misma imagen sirve para cualquier color. */
-.espacio__fijo::before,
-.espacio__fijo::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-color: var(--terracota);
-  -webkit-mask-image: url('/patron.webp');
-  mask-image: url('/patron.webp');
-  -webkit-mask-size: 640px auto;
-  mask-size: 640px auto;
-  -webkit-mask-position: var(--patron-x, 0px) 0;
-  mask-position: var(--patron-x, 0px) 0;
-}
-
-/* Capa 1: el patrón apenas se insinúa en toda la sección */
-.espacio__fijo::before {
-  opacity: 0.07;
-}
-
-/* Capa 2: la linterna. Son DOS máscaras a la vez: el patrón y un círculo que sigue al mouse.
-   Con "intersect" solo se ve lo que está en las dos: los dibujos que caen dentro del círculo. */
-.espacio__fijo::after {
-  opacity: 0.6;
-  -webkit-mask-image: url('/patron.webp'), radial-gradient(circle var(--luz-radio, 0px) at var(--luz-x, 50%) var(--luz-y, 50%), #000 0%, transparent 100%);
-  mask-image: url('/patron.webp'), radial-gradient(circle var(--luz-radio, 0px) at var(--luz-x, 50%) var(--luz-y, 50%), #000 0%, transparent 100%);
-  -webkit-mask-size: 640px auto, 100% 100%;
-  mask-size: 640px auto, 100% 100%;
-  -webkit-mask-repeat: repeat, no-repeat;
-  mask-repeat: repeat, no-repeat;
-  -webkit-mask-position: var(--patron-x, 0px) 0, 0 0;
-  mask-position: var(--patron-x, 0px) 0, 0 0;
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-}
-
+/* Etiqueta y contador: abajo, porque arriba ya está la barra */
 .espacio__etiqueta,
 .espacio__contador {
   position: absolute;
-  top: 2rem;
+  bottom: 2rem;
   z-index: 2;
 }
 

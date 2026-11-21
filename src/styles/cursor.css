@@ -43,3 +43,9 @@ html.sobre-sol .cursor__punto {
 html.arrastrando .cursor__punto {
   transform: scale(0);
 }
+
+/* Sobre enlaces y botones también crece */
+html.sobre-enlace .cursor__punto {
+  transform: scale(2.6);
+  opacity: 0.5;
+}

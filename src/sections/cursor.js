@@ -30,6 +30,11 @@ export function initCursor(sol) {
     irAY(e.clientY)
   })
 
+  // Sobre enlaces y botones el punto crece (el CSS mira la clase sobre-enlace)
+  document.addEventListener('pointerover', function (e) {
+    raiz.classList.toggle('sobre-enlace', Boolean(e.target.closest('a, button')))
+  })
+
   // Si el mouse se sale de la ventana, el punto se esconde
   raiz.addEventListener('mouseleave', function () {
     cursor.classList.remove('cursor--visible')
