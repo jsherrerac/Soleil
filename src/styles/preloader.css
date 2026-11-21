@@ -1,0 +1,69 @@
+/* Capa que tapa todo mientras carga: la noche antes de abrir */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--espresso);
+  color: var(--marfil);
+  overflow: hidden;
+}
+
+/* El amanecer: un círculo marfil que crece desde el sol (empieza en tamaño 0) */
+.preloader__amanecer {
+  position: absolute;
+  inset: 0;
+  background: var(--marfil);
+  clip-path: circle(0% at 50% 50%);
+}
+
+.preloader__sol {
+  position: relative;
+  z-index: 1;
+  width: clamp(140px, 22vw, 300px);
+  overflow: visible;
+  --color-sol: var(--terracota);
+}
+
+.preloader__sol .sol__espiral,
+.preloader__sol .sol__rayos line {
+  stroke-width: 3;
+}
+
+/* Textos de las esquinas */
+.preloader__texto {
+  position: absolute;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.preloader__texto--marca {
+  top: 2rem;
+  left: 2rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+}
+
+.preloader__texto--hora { top: 2rem; right: 2rem; }
+.preloader__texto--frase { bottom: 2rem; left: 2rem; }
+
+/* El contador gigante abajo a la derecha */
+.preloader__texto--contador {
+  bottom: 1.25rem;
+  right: 2rem;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 14vw, 12rem);
+  line-height: 0.8;
+  letter-spacing: 0;
+  color: var(--terracota);
+}
+
+@media (max-width: 600px) {
+  .preloader__texto--marca, .preloader__texto--frase { left: 1.25rem; }
+  .preloader__texto--hora, .preloader__texto--contador { right: 1.25rem; }
+}

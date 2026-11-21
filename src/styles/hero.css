@@ -1,0 +1,27 @@
+.hero {
+  align-content: center;   /* junta la hora y el título en el centro */
+  gap: 2rem;
+  text-align: center;
+}
+
+.hero__hora {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.hero__titulo {
+  font-size: clamp(3rem, 11vw, 11rem);
+  line-height: 0.95;
+  font-weight: 600;
+}
+
+/* Cada línea es una "ventana": las letras suben desde abajo y aparecen al cruzar el borde */
+.hero__linea {
+  display: block;
+  overflow: clip;
+  padding: 0.05em 0;
+}
+
+.hero__linea--acento { color: var(--terracota); }

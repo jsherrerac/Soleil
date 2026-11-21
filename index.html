@@ -10,6 +10,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- PRELOADER: la noche antes de abrir. La espiral se dibuja con la carga y amanece -->
+    <div class="preloader" aria-hidden="true">
+      <div class="preloader__amanecer"></div>
+      <svg class="preloader__sol" viewBox="-50 -50 100 100">
+        <path class="sol__espiral" d="M0.00 0.00 L0.18 0.03 L0.35 0.10 L0.50 0.23 L0.62 0.40 L0.69 0.60 L0.71 0.84 L0.68 1.09 L0.60 1.34 L0.45 1.59 L0.24 1.82 L-0.03 2.02 L-0.34 2.17 L-0.71 2.28 L-1.10 2.32 L-1.53 2.29 L-1.96 2.18 L-2.40 1.99 L-2.81 1.72 L-3.20 1.38 L-3.54 0.95 L-3.82 0.45 L-4.03 -0.11 L-4.16 -0.71 L-4.18 -1.36 L-4.11 -2.03 L-3.93 -2.70 L-3.63 -3.36 L-3.23 -3.99 L-2.72 -4.57 L-2.10 -5.08 L-1.40 -5.51 L-0.61 -5.83 L0.24 -6.05 L1.14 -6.13 L2.06 -6.08 L3.00 -5.88 L3.91 -5.54 L4.80 -5.05 L5.62 -4.43 L6.35 -3.67 L6.98 -2.79 L7.49 -1.80 L7.85 -0.72 L8.06 0.42 L8.09 1.61 L7.95 2.82 L7.63 4.01 L7.12 5.17 L6.43 6.27 L5.58 7.27 L4.57 8.16 L3.42 8.90 L2.14 9.48 L0.78 9.87 L-0.66 10.06 L-2.13 10.04 L-3.62 9.80 L-5.07 9.34 L-6.47 8.67 L-7.78 7.78 L-8.96 6.69 L-9.99 5.42 L-10.84 4.00 L-11.48 2.44 L-11.89 0.78 L-12.06 -0.95 L-11.98 -2.71 L-11.64 -4.47 L-11.04 -6.18 L-10.18 -7.81 L-9.08 -9.32 L-7.76 -10.68 L-6.23 -11.84 L-4.53 -12.79 L-2.68 -13.49 L-0.73 -13.91 L1.29 -14.06 L3.34 -13.90 L5.37 -13.45 L7.33 -12.70 L9.19 -11.66 L10.90 -10.35 L12.43 -8.78 L13.72 -6.99 L14.76 -5.01 L15.50 -2.87 L15.94 -0.63 L16.04 1.69 L15.81 4.02 L15.24 6.31 L14.34 8.53 L13.11 10.61 L11.57 12.52 L9.76 14.20 L7.70 15.62 L5.44 16.74 L3.01 17.53 L0.47 17.96 L-2.13 18.02 L-4.75 17.71 L-7.31 17.01 L-9.77 15.94 L-12.07 14.52 L-14.17 12.76 L-16.01 10.69 L-17.54 8.37 L-18.73 5.82 L-19.56 3.10 L-19.98 0.26 L-19.99 -2.63 L-19.59 -5.52 L-18.76 -8.35 L-17.52 -11.05 L-15.89 -13.57 L-13.90 -15.85 L-11.58 -17.84 L-8.98 -19.48 L-6.14 -20.74 L-3.13 -21.59 L-0.00 -22.00" />
+        <g class="sol__rayos">
+          <line x1="0" y1="-30" x2="0" y2="-42" />
+          <line x1="0" y1="-30" x2="0" y2="-42" transform="rotate(45)" />
+          <line x1="0" y1="-30" x2="0" y2="-42" transform="rotate(90)" />
+          <line x1="0" y1="-30" x2="0" y2="-42" transform="rotate(135)" />
+          <line x1="0" y1="-30" x2="0" y2="-42" transform="rotate(180)" />
+          <line x1="0" y1="-30" x2="0" y2="-42" transform="rotate(225)" />
+          <line x1="0" y1="-30" x2="0" y2="-42" transform="rotate(270)" />
+          <line x1="0" y1="-30" x2="0" y2="-42" transform="rotate(315)" />
+        </g>
+      </svg>
+      <p class="preloader__texto preloader__texto--marca">Soleil Brunch</p>
+      <p class="preloader__texto preloader__texto--hora">Bogotá</p>
+      <p class="preloader__texto preloader__texto--frase">Good food · Bright days</p>
+      <p class="preloader__texto preloader__texto--contador"><span class="preloader__numero">000</span></p>
+    </div>
+
     <!-- Capa fija detrás de todo: el sol cruza el cielo con el scroll -->
     <div class="cielo" aria-hidden="true">
       <!-- SOL TEMPORAL: se reemplaza por el SVG de Deiby (mismas clases) -->
@@ -29,7 +51,13 @@
     </div>
 
     <main>
-      <section class="section" id="hero">7:00 · Hero</section>
+      <section class="section hero" id="hero">
+        <p class="hero__hora">07:00 — Amanece en Soleil</p>
+        <h1 class="hero__titulo">
+          <span class="hero__linea">Good food.</span>
+          <span class="hero__linea hero__linea--acento">Bright days.</span>
+        </h1>
+      </section>
       <section class="section" id="manifiesto">Manifiesto</section>
       <section class="section" id="dia">El día en Soleil</section>
       <section class="section" id="cafe">El café</section>

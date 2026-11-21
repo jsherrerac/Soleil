@@ -21,6 +21,9 @@ main {
   overflow: visible;
   will-change: transform;
   --color-sol: var(--terracota);
+  /* Escondido hasta que termine el preloader */
+  opacity: 0;
+  visibility: hidden;
 }
 
 .sol__espiral,

@@ -1,13 +1,19 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SplitText } from 'gsap/SplitText'
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
 import './styles/variables.css'
 import './styles/base.css'
 import './styles/sol.css'
+import './styles/preloader.css'
+import './styles/hero.css'
 import { initSol } from './sections/sol.js'
+import { initHero } from './sections/hero.js'
+import { initPreloader } from './sections/preloader.js'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin)
 
 // --- Scroll suave ---
 const lenis = new Lenis()
@@ -35,3 +41,5 @@ gsap.timeline({
 
 // --- Secciones ---
 initSol()
+const entradaHero = initHero()
+initPreloader(lenis, entradaHero)
