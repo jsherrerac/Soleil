@@ -1,5 +1,13 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+  /* Reserva SIEMPRE el espacio de la barra de scroll. Mientras carga, Lenis la esconde;
+     sin esto, al aparecer la barra la página entera se corre unos píxeles */
+  scrollbar-gutter: stable;
+  /* El "lienzo" de atrás: es lo que se ve en ese espacio mientras carga (igual al preloader) */
+  background: var(--espresso);
+}
+
 body {
   background: var(--marfil);
   color: var(--espresso);
@@ -39,4 +47,15 @@ body::after {
 
 @media (prefers-reduced-motion: reduce) {
   body::after { animation: none; }
+}
+
+/* Texto que leen los lectores de pantalla (y Google) pero que no se ve en pantalla */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }

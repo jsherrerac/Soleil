@@ -1,0 +1,45 @@
+/* Con mouse, se esconde la flecha del sistema y se usa el punto
+   (la clase la pone cursor.js solo en computadores con mouse) */
+html.cursor-propio,
+html.cursor-propio * {
+  cursor: none;
+}
+
+/* En los campos de texto sí se deja el cursor normal para poder escribir */
+html.cursor-propio input,
+html.cursor-propio textarea {
+  cursor: text;
+}
+
+/* El contenedor lo mueve GSAP (x, y). El punto de adentro es el que cambia de tamaño:
+   si escaláramos el mismo elemento que GSAP mueve, la escala también multiplicaría su posición. */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;              /* encima de todo: del grano y hasta del preloader */
+  pointer-events: none;      /* que no estorbe los clics */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursor--visible { opacity: 1; }
+
+.cursor__punto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--terracota);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* Sobre la espiral que se puede agarrar: crece para decir "agárrame" */
+html.sobre-sol .cursor__punto {
+  transform: scale(3.5);
+  opacity: 0.45;
+}
+
+/* Arrastrando: el sol hace de cursor, el punto se esconde */
+html.arrastrando .cursor__punto {
+  transform: scale(0);
+}

@@ -26,11 +26,6 @@
   --color-sol: var(--terracota);
 }
 
-.preloader__sol .sol__espiral,
-.preloader__sol .sol__rayos line {
-  stroke-width: 3;
-}
-
 /* Textos de las esquinas */
 .preloader__texto {
   position: absolute;
@@ -67,3 +62,14 @@
   .preloader__texto--marca, .preloader__texto--frase { left: 1.25rem; }
   .preloader__texto--hora, .preloader__texto--contador { right: 1.25rem; }
 }
+
+/* Pinceles de las máscaras: en una máscara, lo blanco se ve y lo vacío no.
+   Son un poco más gruesos que el trazo que descubren (espiral: 6, rayos: 4) */
+.pincel {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pincel--espiral { stroke-width: 8; }
+.pincel--rayo { stroke-width: 6; }

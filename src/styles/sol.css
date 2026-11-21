@@ -19,18 +19,14 @@ main {
   left: 0;
   width: clamp(80px, 12vw, 180px);
   overflow: visible;
-  will-change: transform;
   --color-sol: var(--terracota);
   /* Escondido hasta que termine el preloader */
   opacity: 0;
   visibility: hidden;
 }
 
+/* El sol de Deiby está hecho de figuras rellenas (pinceladas), no de líneas */
 .sol__espiral,
-.sol__rayos line {
-  fill: none;
-  stroke: var(--color-sol);
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.sol__rayos path {
+  fill: var(--color-sol);
 }

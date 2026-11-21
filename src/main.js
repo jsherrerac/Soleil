@@ -9,11 +9,21 @@ import './styles/base.css'
 import './styles/sol.css'
 import './styles/preloader.css'
 import './styles/hero.css'
+import './styles/cursor.css'
+import './styles/espacio.css'
 import { initSol } from './sections/sol.js'
 import { initHero } from './sections/hero.js'
 import { initPreloader } from './sections/preloader.js'
+import { initArrastre } from './sections/arrastre.js'
+import { initCursor } from './sections/cursor.js'
+import { initEspacio } from './sections/espacio.js'
 
 gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin)
+
+// ScrollTrigger, al arrancar, anota cómo restaura el navegador el scroll al recargar
+// y lo vuelve a poner en cada refresh. Le decimos 'manual': dónde arranca la página
+// lo decidimos nosotros (ver preloader.js).
+ScrollTrigger.clearScrollMemory('manual')
 
 // --- Scroll suave ---
 const lenis = new Lenis()
@@ -40,6 +50,9 @@ gsap.timeline({
   .to('body', { backgroundColor: espresso, color: '#F4EADC' })
 
 // --- Secciones ---
-initSol()
-const entradaHero = initHero()
-initPreloader(lenis, entradaHero)
+const sol = initSol()
+const hero = initHero()
+initArrastre(sol, hero.letras)
+initEspacio()
+initCursor(sol)
+initPreloader(lenis, hero.entrada, sol)

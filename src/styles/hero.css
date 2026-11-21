@@ -1,6 +1,7 @@
 .hero {
-  align-content: center;   /* junta la hora y el título en el centro */
-  gap: 2rem;
+  align-content: center;   /* junta todo en el centro vertical */
+  justify-items: center;
+  gap: 1.5rem;
   text-align: center;
 }
 
@@ -11,17 +12,60 @@
   text-transform: uppercase;
 }
 
-.hero__titulo {
-  font-size: clamp(3rem, 11vw, 11rem);
-  line-height: 0.95;
-  font-weight: 600;
+/* El logo de Deiby, grande, de borde a borde */
+.hero__marca {
+  position: relative;           /* para poner la caja del sol encima del logo */
+  width: min(90vw, 160vh);
+  user-select: none;            /* al arrastrar el sol no se selecciona nada */
+  -webkit-user-select: none;
 }
 
-/* Cada línea es una "ventana": las letras suben desde abajo y aparecen al cruzar el borde */
-.hero__linea {
+.hero__logo {
   display: block;
-  overflow: clip;
-  padding: 0.05em 0;
+  width: 100%;
+  height: auto;
+  overflow: visible;            /* que el brillo de las letras no se corte en el borde */
 }
 
-.hero__linea--acento { color: var(--terracota); }
+.hero__letra,
+.hero__brunch-letra {
+  fill: var(--espresso);
+}
+
+/* La caja del sol: mismo lugar y tamaño que el sol en el archivo del logo.
+   Sale de las medidas del SVG (viewBox "19 19 563 184"):
+   centro del sol en (168.85, 93.25) y ancho 138.9
+   → left = (168.85 − 19) ÷ 563 = 26.616 %
+   → top  = (93.25 − 19) ÷ 184 = 40.353 %
+   → ancho = 138.9 ÷ 563 = 24.671 %
+   Como el logo escala parejo, los porcentajes siempre caen en el mismo punto. */
+.hero__o {
+  position: absolute;
+  left: 26.616%;
+  top: 40.353%;
+  width: 24.671%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+}
+
+/* La zona que se puede agarrar: el círculo de la espiral (78 de 138.9 = 56 % del sol).
+   Los rayos quedan por fuera. Está en la página, encima del sol, porque el sol vive
+   en una capa de atrás que no recibe clics. */
+.hero__agarre {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56.16%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  touch-action: none;           /* en celular, arrastrar mueve el sol y no la página */
+}
+
+.hero__lema {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.6vw, 1.5rem);
+  letter-spacing: 0.15em;
+}
+
+.hero__lema span { color: var(--terracota); }
