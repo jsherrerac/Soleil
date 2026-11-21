@@ -73,3 +73,27 @@
 }
 .pincel--espiral { stroke-width: 8; }
 .pincel--rayo { stroke-width: 6; }
+
+/* El patrón de Deiby en la noche del preloader: muy tenue y moviéndose despacio.
+   La capa mide una baldosa más de ancho (640px) y se corre exactamente eso:
+   cuando la animación vuelve a empezar, el dibujo es idéntico y no se nota el salto. */
+.preloader::before {
+  content: '';
+  position: absolute;
+  inset: 0 -640px 0 0;
+  background-color: var(--terracota);
+  -webkit-mask-image: url('/patron.webp');
+  mask-image: url('/patron.webp');
+  -webkit-mask-size: 640px auto;
+  mask-size: 640px auto;
+  opacity: 0.06;
+  animation: deriva 40s linear infinite;
+}
+
+@keyframes deriva {
+  to { transform: translateX(-640px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader::before { animation: none; }
+}

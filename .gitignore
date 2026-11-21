@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Patrones originales de Deiby: pesan 18 MB cada uno (Illustrator). En la web se usa public/patron.webp
+diseno/patrones/
