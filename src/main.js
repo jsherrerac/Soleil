@@ -4,6 +4,8 @@ import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
 import './styles/variables.css'
 import './styles/base.css'
+import './styles/sol.css'
+import { initSol } from './sections/sol.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,7 +19,7 @@ gsap.ticker.lagSmoothing(0)
 
 // --- Prueba: el día avanza con el scroll ---
 const css = getComputedStyle(document.documentElement)
-const terracota = css.getPropertyValue('--terracota').trim()
+const terracotaClaro = css.getPropertyValue('--terracota-claro').trim()
 const espresso = css.getPropertyValue('--espresso').trim()
 
 gsap.timeline({
@@ -28,5 +30,8 @@ gsap.timeline({
     scrub: true
   }
 })
-  .to('body', { backgroundColor: terracota })
+  .to('body', { backgroundColor: terracotaClaro })
   .to('body', { backgroundColor: espresso, color: '#F4EADC' })
+
+// --- Secciones ---
+initSol()
